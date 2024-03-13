@@ -13,14 +13,14 @@
   "author": "Mostafa Esmaeili",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.21.0",
+    "axios": "^1.6.7",
     "bcryptjs": "^2.4.3",
     "client": "file:client",
     "config": "^3.3.3",
     "express": "^4.17.1",
     "express-validator": "^6.8.1",
     "gravatar": "^1.8.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^5.11.8",
     "normalize-url": "^5.3.0"
   },
