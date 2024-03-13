@@ -1,3 +1,6 @@
 {
-  "mongoURI": "mongodb+srv://lvlresmaeili:$habdare3Rang@cluster0.udtgixg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  "mongoURI": "mongodb+srv://lvlresmaeili:$habdare3Rang@cluster0.udtgixg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+  "jwtSecret": "mysecrettoken",
+  "githubClientId": "cb616d26576f391912bc",
+  "githubSecret": "c7428ba0a2fb2ce46dab0ec37d292e013df80ca1"
 }
