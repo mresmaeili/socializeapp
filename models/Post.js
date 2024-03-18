@@ -15,6 +15,10 @@ const PostSchema = new Schema({
   avatar: {
     type: String
   },
+  image: {
+    data: Buffer, // Storing image data as buffer
+    contentType: String // Mime type of the image
+  },
   likes: [
     {
       user: {

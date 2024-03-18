@@ -3,6 +3,8 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 
+const multer = require('multer');
+
 const Post = require('../../models/Post');
 const User = require('../../models/User');
 const checkObjectId = require('../../middleware/checkObjectId');
@@ -10,10 +12,53 @@ const checkObjectId = require('../../middleware/checkObjectId');
 // @route    POST api/posts
 // @desc     Create a post
 // @access   Private
+// router.post(
+//   '/',
+//   auth,
+//   check('text', 'Text is required').notEmpty(),
+//   async (req, res) => {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//       return res.status(400).json({ errors: errors.array() });
+//     }
+
+//     try {
+//       const user = await User.findById(req.user.id).select('-password');
+
+//       const newPost = new Post({
+//         text: req.body.text,
+//         name: user.name,
+//         avatar: user.avatar,
+//         user: req.user.id
+//       });
+
+//       const post = await newPost.save();
+
+//       res.json(post);
+//     } catch (err) {
+//       console.error(err.message);
+//       res.status(500).send('Server Error');
+//     }
+//   }
+// );
+
+// Set up multer storage
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 router.post(
   '/',
   auth,
-  check('text', 'Text is required').notEmpty(),
+  upload.single('image'), // Add this line to handle image upload
+  [
+    check('text', 'Text is required').notEmpty(),
+    check('image', 'Image is required').custom((value, { req }) => {
+      if (!req.file) {
+        throw new Error('No image uploaded');
+      }
+      return true;
+    })
+  ],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -27,7 +72,8 @@ router.post(
         text: req.body.text,
         name: user.name,
         avatar: user.avatar,
-        user: req.user.id
+        user: req.user.id,
+        image: req.file ? req.file.buffer : null // Check if file is uploaded
       });
 
       const post = await newPost.save();
