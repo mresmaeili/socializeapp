@@ -92,7 +92,8 @@ const checkObjectId = require('../../middleware/checkObjectId');
 
 // Set up multer storage (memory storage for simplicity)
 const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
+const upload = multer({ storage: multer.memoryStorage() });
 
 router.post(
   '/',
@@ -121,7 +122,10 @@ router.post(
         name: user.name,
         avatar: user.avatar,
         user: req.user.id,
-        image: req.file ? req.file.buffer : null // Check if image uploaded
+        image: {
+          data: req.file.buffer,
+          contentType: req.file.mimetype // Use mimetype from multer
+        }
       });
 
       const post = await newPost.save();
