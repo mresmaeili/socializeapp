@@ -1,10 +1,21 @@
 /* Global Styles */
-:root {
+/* :root {
   --primary-color: #17a2b8;
   --dark-color: #343a40;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
   --success-color: #28a745;
+} */
+:root {
+  --primary-color: linear-gradient(
+    to right,
+    #43777a,
+    #20c997
+  ); /* Gradient from blue to teal */
+  --dark-color: #202124; /* Deep dark gray */
+  --light-color: #f5f5f5; /* Light gray */
+  --danger-color: #ef476f; /* Light red */
+  --success-color: #2ecc71; /* Emerald green */
 }
 
 * {
@@ -471,7 +482,29 @@ button {
 }
 
 .post img {
-  width: 100px;
+  width: 100%;
+}
+
+.text-area {
+  /* Existing styles */
+  display: block;
+  width: 100%;
+  padding: 0.4rem;
+  font-size: 1.2rem;
+  border: 1px solid #ddd; /* Use #ddd for a lighter border */
+
+  /* Improved styles */
+  border-radius: 4px; /* Add rounded corners */
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+  resize: vertical; /* Allow vertical resizing for longer text */
+  outline: none; /* Remove default outline */
+  background-color: #fff; /* Set background color to white */
+  font-family: inherit; /* Inherit font family from parent element */
+  transition: border-color 0.2s ease-in-out; /* Add hover effect */
+}
+
+.text-area:focus {
+  border-color: #1da1f2; /* Change border color on focus */
 }
 
 .post .comment-count {
@@ -581,4 +614,135 @@ button {
   top: 4rem;
   right: 2rem;
   display: inline-block;
+}
+
+/* Assuming you have a separate CSS file */
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Make the form responsive */
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  background-color: #fff; /* Light background color */
+}
+
+.post-form-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  color: #fff; /* Text color for header */
+  background-color: #1da1f2; /* Primary color for header */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Make the form elements responsive */
+  padding: 1rem; /* Add some padding inside the form */
+}
+
+.text-area {
+  border: 1px solid #ccc; /* Border for text area */
+  border-radius: 4px;
+  padding: 0.5rem; /* Add padding for better spacing */
+  resize: none; /* Disable resizing */
+  margin-bottom: 1rem;
+}
+
+.image-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+  min-height: 100px;
+}
+
+.image-preview {
+  width: 100%;
+  height: calc(100% / (16 / 9));
+  object-fit: contain;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.dropzone {
+  border: 2px dashed #ddd; /* Dashed border for dropzone */
+  border-radius: 4px;
+  padding: 1rem;
+  cursor: pointer; /* Indicate hover/click interaction */
+  text-align: center; /* Center align dropzone text */
+}
+.dropzone--focused {
+  /* Styles for the focused Dropzone */
+  border-color: #1da1f2; /* Change border color on focus */
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1); /* Add a subtle shadow on focus */
+}
+.dropzone-text {
+  margin: 0;
+  color: #999;
+  margin: 0;
+  text-align: center;
+  font-size: 12px;
+}
+img.dropimg {
+  height: 64px;
+}
+.btn-submit {
+  background-color: #1da1f2; /* Primary color for submit button */
+  color: #fff; /* Text color for submit button */
+  border: none; /* Remove default border */
+  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  cursor: pointer; /* Indicate hover/click interaction */
+  transition: background-color 0.2s ease-in-out; /* Add hover effect */
+}
+
+.btn-submit:hover {
+  background-color: #1a8bcd;
+}
+
+.dropzone {
+  /* Existing styles (if any) */
+
+  display: flex; /* Arrange content horizontally */
+  justify-content: center; /* Center content within the dropzone */
+  align-items: center; /* Align content vertically */
+  border: 2px dashed #ddd; /* Dashed border for dropzone */
+  border-radius: 4px;
+  padding: 1rem;
+  cursor: pointer; /* Indicate hover/click interaction */
+  text-align: center; /* Remove default text alignment */
+  color: #999; /* Text color for dropzone text (optional) */
+
+  background-repeat: no-repeat; /* Prevent image tiling */
+  background-position: center; /* Center image within Dropzone */
+  background-size: cover; /* Resize image to fit container */
+}
+
+.dropzone i {
+  /* Icon styles */
+  font-size: 2rem; /* Adjust icon size as needed */
+  margin-right: 0.5rem; /* Add some margin between icon and text */
+}
+
+.dropzone p {
+  /* Optional text styles, hidden by default */
+  display: none;
+}
+
+.dropzone:hover {
+  /* Hover effect */
+  border-color: #ccc; /* Change border color on hover */
+  background-color: #f5f5f5; /* Add a subtle background change on hover */
+}
+
+.sectiondropzone {
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 100px;
+  background-position: center;
 }

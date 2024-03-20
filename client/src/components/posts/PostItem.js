@@ -21,7 +21,15 @@ const PostItem = ({
     </div>
 
     <div>
-      <img src={image && image} className="post-img" />
+      <img
+        src={
+          image &&
+          `data:${image.contentType};base64,${Buffer.from(image.data).toString(
+            'base64'
+          )}`
+        }
+        className="post-img"
+      />
       <p className="my-1">{text}</p>
       <p className="post-date">Posted on {formatDate(date)}</p>
 
