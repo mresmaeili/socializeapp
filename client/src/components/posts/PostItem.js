@@ -10,7 +10,7 @@ const PostItem = ({
   removeLike,
   deletePost,
   auth,
-  post: { _id, text, name, avatar, user, likes, comments, date }
+  post: { _id, text, name, avatar, user, image, likes, comments, date }
 }) => (
   <div className="post bg-white p-1 my-1">
     <div>
@@ -19,7 +19,9 @@ const PostItem = ({
         <h4>{name}</h4>
       </Link>
     </div>
+
     <div>
+      <img src={image && image} className="post-img" />
       <p className="my-1">{text}</p>
       <p className="post-date">Posted on {formatDate(date)}</p>
 

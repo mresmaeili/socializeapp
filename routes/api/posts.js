@@ -43,13 +43,61 @@ const checkObjectId = require('../../middleware/checkObjectId');
 // );
 
 // Set up multer storage
+// const storage = multer.memoryStorage();
+// const upload = multer({ storage: storage });
+
+// router.post(
+//   '/',
+//   auth,
+//   upload.single('image'), // Add this line to handle image upload
+//   [
+//     check('text', 'Text is required').notEmpty(),
+//     check('image', 'Image is required').custom((value, { req }) => {
+//       if (!req.file) {
+//         throw new Error('No image uploaded');
+//       }
+//       return true;
+//     })
+//   ],
+//   async (req, res) => {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//       return res.status(400).json({ errors: errors.array() });
+//     }
+
+//     try {
+//       const user = await User.findById(req.user.id).select('-password');
+
+//       const newPost = new Post({
+//         text: req.body.text,
+//         name: user.name,
+//         avatar: user.avatar,
+//         user: req.user.id,
+//         image: req.file ? req.file.buffer : null // Check if file is uploaded
+//       });
+
+//       const post = await newPost.save();
+
+//       res.json(post);
+//     } catch (err) {
+//       console.error(err.message);
+//       res.status(500).send('Server Error');
+//     }
+//   }
+// );
+
+// @route    GET api/posts
+// @desc     Get all posts
+// @access   Private
+
+// Set up multer storage (memory storage for simplicity)
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 router.post(
   '/',
   auth,
-  upload.single('image'), // Add this line to handle image upload
+  upload.single('image'), // Handle image upload
   [
     check('text', 'Text is required').notEmpty(),
     check('image', 'Image is required').custom((value, { req }) => {
@@ -67,13 +115,13 @@ router.post(
 
     try {
       const user = await User.findById(req.user.id).select('-password');
-
+      console.log(req);
       const newPost = new Post({
         text: req.body.text,
         name: user.name,
         avatar: user.avatar,
         user: req.user.id,
-        image: req.file ? req.file.buffer : null // Check if file is uploaded
+        image: req.file ? req.file.buffer : null // Check if image uploaded
       });
 
       const post = await newPost.save();
@@ -86,9 +134,6 @@ router.post(
   }
 );
 
-// @route    GET api/posts
-// @desc     Get all posts
-// @access   Private
 router.get('/', auth, async (req, res) => {
   try {
     const posts = await Post.find().sort({ date: -1 });
